@@ -15,7 +15,7 @@ spec:
     targetRevision: 15.5.31
     helm:
       releaseName: postgres
-      valuesObject:
+      values: |
         image:
           debug: true
         resources:
