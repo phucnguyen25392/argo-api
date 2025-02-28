@@ -1,8 +1,0 @@
-helm:
-  parameters:
-  - name: backend.image.name
-    value: realmaxwebapp/my_backend
-    forcestring: true
-  - name: backend.image.tag
-    value: 1.0.7
-    forcestring: true
