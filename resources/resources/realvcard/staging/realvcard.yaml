@@ -1,0 +1,32 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: realvcard
+  namespace: staging
+spec:
+  releaseName: realvcard
+  install:
+    timeout: 20m
+  upgrade:
+    timeout: 20m
+  chart:
+    spec:
+      chart: realchart
+      sourceRef:
+        kind: HelmRepository
+        name: devops-helm-charts
+      version: "0.1.2"
+  interval: 5m
+  values:
+    name: realvcard
+    namespace: staging
+    resources:
+      limits:
+        memory: 500Mi
+        cpu: 500m
+      requests:
+        memory: 300Mi
+        cpu: 300m
+    image:
+      repository: realmaxwebapp1/realvcard # {"$imagepolicy": "flux-system:realvcard-production:name"}
+      tag: 1.0.0 # {"$imagepolicy": "flux-system:realvcard-production:tag"}

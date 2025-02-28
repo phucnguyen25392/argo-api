@@ -1,0 +1,44 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: postgres
+  namespace: api
+spec:
+  values:
+    image:
+      debug: true
+    resources:
+      requests:
+        cpu: "2"
+        memory: 512Mi
+      limits:
+        cpu: "2"
+        memory: 1024Mi
+    auth:
+      ## @param auth.enablePostgresUser Assign a password to the "postgres" admin user. Otherwise, remote access will be blocked for this user
+      ##
+      enablePostgresUser: false
+      ## @param auth.username Name for a custom user to create
+      ##
+      username: "api"
+      ## @param auth.password Password for the custom user to create. Ignored if `auth.existingSecret` is provided
+      ##
+      password: "123"
+      ## @param auth.database Name for a custom database to create
+      ##
+      database: "mydb"
+    initdb:
+      scripts:
+        init.sql: |
+          -- Create a table to store data
+          CREATE TABLE users (
+              id SERIAL PRIMARY KEY,
+              name TEXT NOT NULL,
+              email TEXT NOT NULL
+          );
+        custom_user_setup.sh: |
+          #!/bin/sh
+          export PGPASSWORD="123"
+          psql -h localhost -p 5432 -U api -d mydb -c "CREATE TABLE users (id SERIAL PRIMARY KEY, name TEXT NOT NULL, email TEXT NOT NULL);"
+      user: "api"
+      password: "123"
