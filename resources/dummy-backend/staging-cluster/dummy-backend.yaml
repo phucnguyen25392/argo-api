@@ -23,7 +23,7 @@ spec:
     targetRevision: 0.1.3
     helm:
       valueFiles:
-      - $values/resources/dummy-backend/staging-cluster/values-staging.yaml.yaml
+      - $values/resources/dummy-backend/staging-cluster/values-staging.yaml
   - repoURL: 'https://github.com/phucnguyen25392/argo-api'
     targetRevision: master
     ref: values
