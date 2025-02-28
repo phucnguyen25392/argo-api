@@ -1,6 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: backend=realmaxwebapp/my_backend
+    argocd-image-updater.argoproj.io/backend.helm.image-name: backend.image.name
+    argocd-image-updater.argoproj.io/backend.helm.image-tag: backend.image.tag
+    argocd-image-updater.argoproj.io/backend.update-strategy: latest
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
+    argocd-image-updater.argoproj.io/git-repository: https://github.com/phucnguyen25392/argo-api
+    argocd-image-updater.argoproj.io/git-branch: master
   name: my-backend
   finalizers:
     - resources-finalizer.argocd.argoproj.io
