@@ -12,7 +12,7 @@ spec:
   source:
     chart: realchart
     repoURL: https://phucnguyen25392.github.io/devops-charts
-    version: 2.4.0
+    targetRevision: 2.4.0
     helm:
       releaseName: my-backend
       valuesObject:
