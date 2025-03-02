@@ -26,4 +26,6 @@ spec:
       image:
         repository: realmaxwebapp1/realvcard
         tag: 1.0.6
-
+image:
+  tag: 1.0.7
+  repository: realmaxwebapp/my_backend
