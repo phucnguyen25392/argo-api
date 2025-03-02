@@ -3,10 +3,11 @@ kind: Application
 metadata:
   annotations:
     argocd-image-updater.argoproj.io/image-list: backend=realmaxwebapp/my_backend:1.0.x
-    argocd-image-updater.argoproj.io/backend.helm.image-name: backend.image.name
-    argocd-image-updater.argoproj.io/backend.helm.image-tag: backend.image.tag
+    argocd-image-updater.argoproj.io/backend.helm.image-name: image.repository
+    argocd-image-updater.argoproj.io/backend.helm.image-tag: image.tag
     argocd-image-updater.argoproj.io/sampleapp.update-strategy: "semver"
     argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
+    argocd-image-updater.argoproj.io/write-back-target: helmvalues:resources/dummy-backend/staging-cluster/values-staging.yaml
     argocd-image-updater.argoproj.io/git-repository: https://github.com/phucnguyen25392/argo-api
     argocd-image-updater.argoproj.io/git-branch: master
   name: my-backend
@@ -22,9 +23,11 @@ spec:
     repoURL: https://phucnguyen25392.github.io/devops-charts
     targetRevision: 0.1.3
     helm:
-      valueFiles:
-      - $values/resources/dummy-backend/staging-cluster/values-staging.yaml
-  - repoURL: 'https://github.com/phucnguyen25392/argo-api'
-    targetRevision: master
-    ref: values
+      parameters:
+      - name: backend.image.repository
+        value: realmaxwebapp/my_backend
+        forcestring: true
+      - name: backend.image.tag
+        value: 1.0.6
+        forcestring: true
 
