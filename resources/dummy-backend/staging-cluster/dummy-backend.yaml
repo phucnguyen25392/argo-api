@@ -3,8 +3,8 @@ kind: Application
 metadata:
   annotations:
     argocd-image-updater.argoproj.io/image-list: backend=realmaxwebapp/my_backend:1.0.x
-    argocd-image-updater.argoproj.io/backend.helm.image-name: spec.sources.helm.valuesObject.image.repository
-    argocd-image-updater.argoproj.io/backend.helm.image-tag: spec.sources.helm.valuesObject.image.tag
+    argocd-image-updater.argoproj.io/backend.helm.image-name: spec.source.helm.valuesObject.image.repository
+    argocd-image-updater.argoproj.io/backend.helm.image-tag: spec.source.helm.valuesObject.image.tag
     argocd-image-updater.argoproj.io/sampleapp.update-strategy: semver
     argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
     argocd-image-updater.argoproj.io/write-back-target: helmvalues:resources/dummy-backend/staging-cluster/dummy-backend.yaml
@@ -18,7 +18,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: api
   project: default
-  sources:
+  source:
   - chart: realchart
     repoURL: https://phucnguyen25392.github.io/devops-charts
     targetRevision: 0.1.3
