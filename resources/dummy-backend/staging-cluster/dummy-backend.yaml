@@ -31,6 +31,6 @@ spec:
         value: 1.0.6
         forcestring: true
       - name: name
-        value: my_backend
+        value: my-backend
         forcestring: true
 
