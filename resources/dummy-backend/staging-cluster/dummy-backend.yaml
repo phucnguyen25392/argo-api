@@ -3,8 +3,8 @@ kind: Application
 metadata:
   annotations:
     argocd-image-updater.argoproj.io/image-list: backend=realmaxwebapp/my_backend:1.0.x
-    argocd-image-updater.argoproj.io/backend.helm.image-name: image.repository
-    argocd-image-updater.argoproj.io/backend.helm.image-tag: image.tag
+    argocd-image-updater.argoproj.io/backend.helm.image-name: spec.sources.helm.image.repository
+    argocd-image-updater.argoproj.io/backend.helm.image-tag: spec.sources.helm.image.tag
     argocd-image-updater.argoproj.io/sampleapp.update-strategy: semver
     argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
     argocd-image-updater.argoproj.io/write-back-target: helmvalues:resources/dummy-backend/staging-cluster/dummy-backend.yaml
@@ -23,16 +23,7 @@ spec:
     repoURL: https://phucnguyen25392.github.io/devops-charts
     targetRevision: 0.1.3
     helm:
-      parameters:
-      - name: image.repository
-        value: realmaxwebapp/my_backend
-        forcestring: true
-      - name: image.tag
-        value: 1.0.6
-        forcestring: true
-      - name: name
-        value: my-backend
-        forcestring: true
-image:
-  tag: 1.0.7
-  repository: realmaxwebapp/my_backend
+      image:
+        repository: realmaxwebapp1/realvcard
+        tag: 1.0.6
+
