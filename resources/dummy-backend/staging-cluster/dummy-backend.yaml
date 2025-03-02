@@ -30,4 +30,7 @@ spec:
       - name: image.tag
         value: 1.0.6
         forcestring: true
+      - name: name
+        value: my_backend
+        forcestring: true
 
